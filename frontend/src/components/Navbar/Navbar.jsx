@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Home from './Home';
 import Contact from './Contact';
+import Voiceinput from './voiceinput';
 
 const Navbar = () => {
     const [activeTab, setActiveTab] = useState('home');
@@ -22,12 +23,19 @@ const Navbar = () => {
                     >
                         Contact
                     </button>
+                    <button
+                        onClick={() => setActiveTab('voiceinput')}
+                        className={`px-3 py-2 rounded ${activeTab === 'voiceinput' ? 'bg-gray-500' : 'hover:bg-gray-700'}`}
+                    >
+                        Voice Input
+                    </button>
                 </div>
             </nav>
 
             <main className="container mx-auto mt-8">
                 {activeTab === 'home' && <Home />}
                 {activeTab === 'contact' && <Contact />}
+                {activeTab === 'voiceinput' && <Voiceinput />}
             </main>
         </div>
     );
