@@ -1,12 +1,15 @@
 import React from 'react';
 import Navbar from './components/Navbar/Navbar';
+import { TaskProvider } from './context/TaskContext';
 import './App.css';
 
 function App() {
   return (
-    <div className="min-h-screen bg-gray-900 text-white">
-      <Navbar />
-    </div>
+    <TaskProvider>
+      <div className="min-h-screen bg-slate-900 text-slate-100 font-sans">
+        <Navbar />
+      </div>
+    </TaskProvider>
   );
 }
 
