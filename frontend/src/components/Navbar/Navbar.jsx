@@ -7,18 +7,18 @@ const Navbar = () => {
 
     return (
         <div className="w-full">
-            <nav className="bg-gray-800 text-white p-4 flex justify-between items-center">
-                <h1 className="text-2xl font-bold">Task Tracker</h1>
+            <nav className="bg-gray-500 text-white p-4 flex justify-between items-center">
+                <h1 className="text-3xl font-bold">Task Tracker</h1>
                 <div className="flex gap-4">
                     <button
                         onClick={() => setActiveTab('home')}
-                        className={`px-3 py-2 rounded ${activeTab === 'home' ? 'bg-gray-700' : 'hover:bg-gray-700'}`}
+                        className={`px-3 py-2 rounded ${activeTab === 'home' ? 'bg-gray-500' : 'hover:bg-gray-700'}`}
                     >
                         Home
                     </button>
                     <button
                         onClick={() => setActiveTab('contact')}
-                        className={`px-3 py-2 rounded ${activeTab === 'contact' ? 'bg-gray-700' : 'hover:bg-gray-700'}`}
+                        className={`px-3 py-2 rounded ${activeTab === 'contact' ? 'bg-gray-500' : 'hover:bg-gray-700'}`}
                     >
                         Contact
                     </button>
