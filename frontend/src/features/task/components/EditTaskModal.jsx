@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useTasks } from '../../context/TaskContext';
+import { useTasks } from '../../../context/TaskContext';
 
 const EditTaskModal = ({ task, onClose }) => {
     const { updateTask } = useTasks();

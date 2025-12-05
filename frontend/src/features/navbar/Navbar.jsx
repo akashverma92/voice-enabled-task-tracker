@@ -1,10 +1,9 @@
 import React, { useState, lazy, Suspense } from 'react';
-import ErrorBoundary from '../common/ErrorBoundary';
+import ErrorBoundary from '../../components/common/ErrorBoundary';
+import { CreateTask, VoiceInput } from '../task';
 
-// Lazy load feature components
-const Home = lazy(() => import('../../features/task/Home'));
-const CreateTask = lazy(() => import('../../features/task/CreateTask'));
-const VoiceInput = lazy(() => import('../../features/task/VoiceInput'));
+// Lazy load Home component
+const Home = lazy(() => import('./Home'));
 
 const Navbar = () => {
     const [activeTab, setActiveTab] = useState('home');
