@@ -84,9 +84,7 @@ const Home = () => {
             </div>
             <p className="text-sm text-slate-400 mb-3 line-clamp-2">{task.description}</p>
             <div className="flex justify-between items-center text-xs">
-                <span className={`px-2 py-1 rounded border ${getPriorityColor(task.priority)}`}>
-                    {task.priority}
-                </span>
+                <span className={`px-2 py-1 rounded border ${getPriorityColor(task.priority)}`}>{task.priority}</span>
                 {task.dueDate && (
                     <span className="text-slate-500 flex items-center gap-1">
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -103,7 +101,6 @@ const Home = () => {
         <div className="h-full flex flex-col">
             <div className="flex flex-col md:flex-row justify-between items-center mb-6 gap-4">
                 <h2 className="text-2xl font-bold text-white">Task Board</h2>
-
                 <div className="flex flex-wrap gap-3 w-full md:w-auto">
                     <input
                         type="text"
@@ -112,7 +109,6 @@ const Home = () => {
                         onChange={(e) => setSearchQuery(e.target.value)}
                         className="bg-slate-800 border border-slate-700 rounded-lg px-3 py-1.5 text-sm text-white focus:border-indigo-500 outline-none flex-grow md:flex-grow-0 md:w-64"
                     />
-
                     <select
                         value={filterPriority}
                         onChange={(e) => setFilterPriority(e.target.value)}
@@ -123,7 +119,6 @@ const Home = () => {
                         <option value="Medium">Medium</option>
                         <option value="Low">Low</option>
                     </select>
-
                     <div className="bg-slate-800 p-1 rounded-lg border border-slate-700 flex">
                         <button
                             onClick={() => setView('kanban')}
@@ -140,7 +135,6 @@ const Home = () => {
                     </div>
                 </div>
             </div>
-
             {view === 'kanban' ? (
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 h-full overflow-hidden">
                     {['To Do', 'In Progress', 'Done'].map(status => (
@@ -191,39 +185,28 @@ const Home = () => {
                                     <td className="px-6 py-4 font-medium text-white">{task.title}</td>
                                     <td className="px-6 py-4">
                                         <span className={`px-2 py-1 rounded-full text-xs border ${task.status === 'Done' ? 'bg-emerald-900/30 text-emerald-400 border-emerald-800' :
-                                                task.status === 'In Progress' ? 'bg-indigo-900/30 text-indigo-400 border-indigo-800' :
-                                                    'bg-slate-700 text-slate-300 border-slate-600'
-                                            }`}>
-                                            {task.status}
-                                        </span>
+                                            task.status === 'In Progress' ? 'bg-indigo-900/30 text-indigo-400 border-indigo-800' :
+                                                'bg-slate-700 text-slate-300 border-slate-600'}`}>{task.status}</span>
                                     </td>
                                     <td className="px-6 py-4">
                                         <span className={`flex items-center gap-1.5 ${task.priority === 'High' ? 'text-red-400' :
-                                                task.priority === 'Medium' ? 'text-amber-400' : 'text-blue-400'
-                                            }`}>
+                                            task.priority === 'Medium' ? 'text-amber-400' : 'text-blue-400'}`}>
                                             <span className={`w-1.5 h-1.5 rounded-full ${task.priority === 'High' ? 'bg-red-400' :
-                                                    task.priority === 'Medium' ? 'bg-amber-400' : 'bg-blue-400'
-                                                }`}></span>
+                                                task.priority === 'Medium' ? 'bg-amber-400' : 'bg-blue-400'}`}></span>
                                             {task.priority}
                                         </span>
                                     </td>
-                                    <td className="px-6 py-4">
-                                        {task.dueDate ? new Date(task.dueDate).toLocaleDateString() : '-'}
-                                    </td>
+                                    <td className="px-6 py-4">{task.dueDate ? new Date(task.dueDate).toLocaleDateString() : '-'}</td>
                                     <td className="px-6 py-4 text-right">
                                         <div className="flex justify-end gap-2">
                                             <button
                                                 onClick={(e) => { e.stopPropagation(); setEditingTask(task); }}
                                                 className="text-slate-500 hover:text-indigo-400 transition-colors"
-                                            >
-                                                Update
-                                            </button>
+                                            >Update</button>
                                             <button
                                                 onClick={(e) => { e.stopPropagation(); deleteTask(task.id); }}
                                                 className="text-slate-500 hover:text-red-400 transition-colors"
-                                            >
-                                                Delete
-                                            </button>
+                                            >Delete</button>
                                         </div>
                                     </td>
                                 </tr>
@@ -231,13 +214,10 @@ const Home = () => {
                         </tbody>
                     </table>
                     {filteredTasks.length === 0 && (
-                        <div className="p-8 text-center text-slate-500">
-                            No tasks found matching your filters.
-                        </div>
+                        <div className="p-8 text-center text-slate-500">No tasks found matching your filters.</div>
                     )}
                 </div>
             )}
-
             {editingTask && (
                 <EditTaskModal
                     task={editingTask}

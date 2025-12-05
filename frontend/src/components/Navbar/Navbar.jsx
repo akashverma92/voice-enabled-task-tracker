@@ -1,7 +1,10 @@
-import React, { useState } from 'react';
-import Home from './Home';
-import CreateTask from './CreateTask';
-import VoiceInput from './VoiceInput';
+import React, { useState, lazy, Suspense } from 'react';
+import ErrorBoundary from '../common/ErrorBoundary';
+
+// Lazy load feature components
+const Home = lazy(() => import('../../features/task/Home'));
+const CreateTask = lazy(() => import('../../features/task/CreateTask'));
+const VoiceInput = lazy(() => import('../../features/task/VoiceInput'));
 
 const Navbar = () => {
     const [activeTab, setActiveTab] = useState('home');
@@ -25,35 +28,22 @@ const Navbar = () => {
                             Task Tracker
                         </h1>
                     </div>
-
                     <div className="flex gap-2">
-                        <button
-                            onClick={() => setActiveTab('home')}
-                            className={getTabClass('home')}
-                        >
-                            Board
-                        </button>
-                        <button
-                            onClick={() => setActiveTab('create-task')}
-                            className={getTabClass('create-task')}
-                        >
-                            New Task
-                        </button>
-                        <button
-                            onClick={() => setActiveTab('voice-input')}
-                            className={getTabClass('voice-input')}
-                        >
-                            Voice Input
-                        </button>
+                        <button onClick={() => setActiveTab('home')} className={getTabClass('home')}>Board</button>
+                        <button onClick={() => setActiveTab('create-task')} className={getTabClass('create-task')}>New Task</button>
+                        <button onClick={() => setActiveTab('voice-input')} className={getTabClass('voice-input')}>Voice Input</button>
                     </div>
                 </div>
             </nav>
-
             <main className="flex-1 overflow-y-auto bg-slate-950 p-6">
                 <div className="container mx-auto max-w-6xl">
-                    {activeTab === 'home' && <Home />}
-                    {activeTab === 'create-task' && <CreateTask onTaskCreated={() => setActiveTab('home')} />}
-                    {activeTab === 'voice-input' && <VoiceInput onTaskCreated={() => setActiveTab('home')} />}
+                    <ErrorBoundary>
+                        <Suspense fallback={<div className="text-white">Loading...</div>}>
+                            {activeTab === 'home' && <Home />}
+                            {activeTab === 'create-task' && <CreateTask onTaskCreated={() => setActiveTab('home')} />}
+                            {activeTab === 'voice-input' && <VoiceInput onTaskCreated={() => setActiveTab('home')} />}
+                        </Suspense>
+                    </ErrorBoundary>
                 </div>
             </main>
         </div>
