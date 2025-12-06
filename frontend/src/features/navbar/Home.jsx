@@ -39,7 +39,7 @@ const Home = () => {
             task.description.toLowerCase().includes(searchQuery.toLowerCase());
         const matchesStatus = filterStatus === 'All' || task.status === filterStatus;
         const matchesPriority = filterPriority === 'All' || task.priority === filterPriority;
-        const matchesDueDate = !filterDueDate || task.dueDate === filterDueDate;
+        const matchesDueDate = !filterDueDate || (task.dueDate && new Date(task.dueDate).toISOString().split('T')[0] === filterDueDate);
 
         return matchesSearch && matchesStatus && matchesPriority && matchesDueDate;
     });
