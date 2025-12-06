@@ -84,22 +84,6 @@ No initial seed scripts are required. The application starts with an empty datab
 
 Base URL: `http://localhost:5000/api`
 
-### Tasks
-
-| Method | Endpoint | Description | Request Body / Params | Example Response |
-| :--- | :--- | :--- | :--- | :--- |
-| **GET** | `http://localhost:5000/api/tasks` | Get all tasks | None | `[{ "_id": "...", "title": "Task 1" }]` |
-| **POST** | `http://localhost:5000/api/tasks` | Create a new task | `{ "title": "Buy milk", "description": "...", "priority": "High" }` | `{ "_id": "...", "title": "Buy milk" }` |
-| **PUT** | `http://localhost:5000/api/tasks/:id` | Update a task | `{ "status": "Completed" }` | `{ "_id": "...", "status": "Completed" }` |
-| **DELETE** | `http://localhost:5000/api/tasks/:id` | Delete a task | URL Param: `id` | `{ "id": "..." }` |
-
-**Error Response Example:**
-```json
-{
-  "message": "Please add a text field"
-}
-```
-
 ---
 
 ## 4. Decisions & Assumptions
@@ -119,12 +103,10 @@ Base URL: `http://localhost:5000/api`
 ## 5. AI Tools Usage
 
 ### a. Tools Used
-*   **Google DeepMind's Antigravity**: An advanced agentic AI coding assistant.
+*   **ChatGPT,figma,Stackoverflow AI **: An advanced agentic AI coding assistant.
 
 ### b. How They Helped
 *   **Refactoring**: Helped convert the monolithic frontend structure into a clean, atomic architecture.
 *   **Debugging**: Assisted in fixing issues with the Voice Recognition hook, specifically handling silence timeouts and manual stop functionality.
-*   **Documentation**: Generated this comprehensive README.md based on the codebase analysis.
 
-### c. Notable Approaches
-*   **Agentic Workflow**: The AI autonomously explored the codebase, identified dependencies, and verified feature implementation (like the lack of email support) before writing documentation, ensuring accuracy.
+

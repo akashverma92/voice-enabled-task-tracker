@@ -7,5 +7,6 @@ export const API_ROUTES = {
         CREATE: API_BASE_URL,
         UPDATE: (id) => `${API_BASE_URL}/${id}`,
         DELETE: (id) => `${API_BASE_URL}/${id}`,
+
     }
 };
