@@ -88,10 +88,10 @@ Base URL: `http://localhost:5000/api`
 
 | Method | Endpoint | Description | Request Body / Params | Example Response |
 | :--- | :--- | :--- | :--- | :--- |
-| **GET** | `/tasks` | Get all tasks | None | `[{ "_id": "...", "title": "Task 1" }]` |
-| **POST** | `/tasks` | Create a new task | `{ "title": "Buy milk", "description": "...", "priority": "High" }` | `{ "_id": "...", "title": "Buy milk" }` |
-| **PUT** | `/tasks/:id` | Update a task | `{ "status": "Completed" }` | `{ "_id": "...", "status": "Completed" }` |
-| **DELETE** | `/tasks/:id` | Delete a task | URL Param: `id` | `{ "id": "..." }` |
+| **GET** | `http://localhost:5000/api/tasks` | Get all tasks | None | `[{ "_id": "...", "title": "Task 1" }]` |
+| **POST** | `http://localhost:5000/api/tasks` | Create a new task | `{ "title": "Buy milk", "description": "...", "priority": "High" }` | `{ "_id": "...", "title": "Buy milk" }` |
+| **PUT** | `http://localhost:5000/api/tasks/:id` | Update a task | `{ "status": "Completed" }` | `{ "_id": "...", "status": "Completed" }` |
+| **DELETE** | `http://localhost:5000/api/tasks/:id` | Delete a task | URL Param: `id` | `{ "id": "..." }` |
 
 **Error Response Example:**
 ```json
