@@ -17,8 +17,7 @@ const TaskList = ({ tasks, onEdit, onDelete }) => {
                     {tasks.map(task => (
                         <tr
                             key={task.id}
-                            onClick={() => onEdit(task)}
-                            className="hover:bg-slate-700/30 transition-colors cursor-pointer group"
+                            className="hover:bg-slate-700/30 transition-colors group"
                         >
                             <td className="px-6 py-4 font-medium text-white">{task.title}</td>
                             <td className="px-6 py-4">

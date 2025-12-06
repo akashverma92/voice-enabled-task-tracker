@@ -14,8 +14,7 @@ const TaskCard = ({ task, onEdit, onDelete, onDragStart }) => {
         <div
             draggable
             onDragStart={(e) => onDragStart(e, task.id)}
-            onClick={() => onEdit(task)}
-            className="bg-slate-800 p-4 rounded-lg border border-slate-700 shadow-sm hover:shadow-md transition-all group cursor-pointer hover:border-indigo-500/50"
+            className="bg-slate-800 p-4 rounded-lg border border-slate-700 shadow-sm hover:shadow-md transition-all group cursor-default hover:border-indigo-500/50"
         >
             <div className="flex justify-between items-start mb-2">
                 <h3 className="font-bold text-white leading-tight">{task.title}</h3>

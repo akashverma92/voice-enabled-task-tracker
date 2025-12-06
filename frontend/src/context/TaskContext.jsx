@@ -1,8 +1,8 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import toast, { Toaster } from 'react-hot-toast';
+import { API_ROUTES } from '../config/api';
 
 const TaskContext = createContext();
-
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api/tasks';
 
 export const useTasks = () => {
     const context = useContext(TaskContext);
@@ -21,7 +21,7 @@ export const TaskProvider = ({ children }) => {
     useEffect(() => {
         const fetchTasks = async () => {
             try {
-                const response = await fetch(API_URL);
+                const response = await fetch(API_ROUTES.TASKS.GET_ALL);
                 if (!response.ok) throw new Error('Failed to fetch tasks');
                 const data = await response.json();
                 // Map _id to id for frontend compatibility
@@ -29,6 +29,7 @@ export const TaskProvider = ({ children }) => {
                 setTasks(formattedTasks);
             } catch (err) {
                 setError(err.message);
+                toast.error('Failed to load tasks');
             } finally {
                 setLoading(false);
             }
@@ -39,7 +40,7 @@ export const TaskProvider = ({ children }) => {
 
     const addTask = async (task) => {
         try {
-            const response = await fetch(API_URL, {
+            const response = await fetch(API_ROUTES.TASKS.CREATE, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -51,18 +52,20 @@ export const TaskProvider = ({ children }) => {
 
             const newTask = await response.json();
             setTasks((prev) => [...prev, { ...newTask, id: newTask._id }]);
+            toast.success('Task created successfully');
         } catch (err) {
             console.error('Error adding task:', err);
-            // Optionally handle error state here
+            toast.error('Failed to create task');
         }
     };
 
     const updateTask = async (id, updatedFields) => {
         // Optimistic update
+        const previousTasks = [...tasks];
         setTasks((prev) => prev.map((task) => (task.id === id ? { ...task, ...updatedFields } : task)));
 
         try {
-            const response = await fetch(`${API_URL}/${id}`, {
+            const response = await fetch(API_ROUTES.TASKS.UPDATE(id), {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -71,35 +74,40 @@ export const TaskProvider = ({ children }) => {
             });
 
             if (!response.ok) {
-                // Revert if failed
                 throw new Error('Failed to update task');
             }
+            toast.success('Task updated successfully');
         } catch (err) {
             console.error('Error updating task:', err);
-            // Revert optimistic update logic would go here in a production app
+            setTasks(previousTasks); // Revert
+            toast.error('Failed to update task');
         }
     };
 
     const deleteTask = async (id) => {
         // Optimistic update
+        const previousTasks = [...tasks];
         setTasks((prev) => prev.filter((task) => task.id !== id));
 
         try {
-            const response = await fetch(`${API_URL}/${id}`, {
+            const response = await fetch(API_ROUTES.TASKS.DELETE(id), {
                 method: 'DELETE',
             });
 
             if (!response.ok) {
                 throw new Error('Failed to delete task');
             }
+            toast.success('Task deleted successfully');
         } catch (err) {
             console.error('Error deleting task:', err);
-            // Revert logic
+            setTasks(previousTasks); // Revert
+            toast.error('Failed to delete task');
         }
     };
 
     return (
         <TaskContext.Provider value={{ tasks, loading, error, addTask, updateTask, deleteTask }}>
+            <Toaster position="top-right" />
             {children}
         </TaskContext.Provider>
     );
